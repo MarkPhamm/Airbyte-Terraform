@@ -1,22 +1,21 @@
-# ---- Source: Local CSV File ----
-# Dynamically constructs the file path using current working directory
-locals {
-  csv_file_path = "${path.cwd}/${var.data_directory}/${var.csv_filename}"
-}
+# ---- Source: HTTP-accessible CSV File using Custom Source ----
+# Using airbyte_source_custom for maximum flexibility
 
-resource "airbyte_source_file" "local_csv" {
+resource "airbyte_source_custom" "local_csv" {
   name         = var.dataset_name
   workspace_id = airbyte_workspace.lab.workspace_id
 
-  configuration = {
+  # File connector definition ID (from your existing setup)
+  definition_id = "778daa7c-feaf-4db6-96f3-70fd645acc77"
+
+  configuration = jsonencode({
     dataset_name = var.dataset_name
     format       = "csv"
-    url          = "file://${local.csv_file_path}"
+    url          = "http://host.docker.internal:8080/data/${var.csv_filename}"
     provider = {
-      local_filesystem_limited = {}
+      storage    = "HTTPS"
+      user_agent = false
     }
-    reader_options = jsonencode({
-      header = 0
-    })
-  }
+    reader_options = "{\"header\": 0}"
+  })
 }
