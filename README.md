@@ -229,3 +229,7 @@ By default Airbyte also writes raw JSON to an internal schema; your final table 
 [3]: https://docs.airbyte.com/integrations/destinations/snowflake "Snowflake Connector | Airbyte Documentation"
 [4]: https://registry.terraform.io/providers/airbytehq/airbyte/0.6.3/docs/resources/destination_snowflake?utm_source=chatgpt.com "airbyte_destination_snowflake | Resources | airbytehq/airbyte ..."
 [5]: https://docs.airbyte.com/platform/deploying-airbyte/integrations/authentication?utm_source=chatgpt.com "Authentication - Airbyte Docs"
+
+```
+python3 -m http.server 8080
+```

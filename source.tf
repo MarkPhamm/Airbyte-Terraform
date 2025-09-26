@@ -11,11 +11,12 @@ resource "airbyte_source_custom" "local_csv" {
   configuration = jsonencode({
     dataset_name = var.dataset_name
     format       = "csv"
-    url          = "http://host.docker.internal:8080/data/${var.csv_filename}"
+    url          = "/tmp/vietnam_airlines_review.csv"
     provider = {
-      storage    = "HTTPS"
-      user_agent = false
+      storage = "local"
     }
-    reader_options = "{\"header\": 0}"
+    reader_options = jsonencode({
+      header = 0
+    })
   })
 }

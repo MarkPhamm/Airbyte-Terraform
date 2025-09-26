@@ -11,7 +11,6 @@ provider "airbyte" {
   client_id     = var.client_id
   client_secret = var.client_secret
 }
-
 # ---- Airbyte Workspace ----
 resource "airbyte_workspace" "lab" {
   name = var.workspace_name
